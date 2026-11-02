@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPS Arena - Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<!-- ============ START / HOME SCREEN ============ -->
+<section id="startScreen" class="screen start-screen">
+    <div class="grid-floor"></div>
+    <span class="float f1">✊</span>
+    <span class="float f2">✋</span>
+    <span class="float f3">✌️</span>
+
+    <div class="start-content">
+        <div class="logo-badge">
+            <svg viewBox="0 0 100 100" class="logo-svg" aria-hidden="true">
+                <polygon points="50,4 92,28 92,72 50,96 8,72 8,28" fill="none" stroke="#00eaff" stroke-width="3"/>
+                <polygon points="50,18 80,35 80,65 50,82 20,65 20,35" fill="rgba(155,92,255,.25)" stroke="#9b5cff" stroke-width="2"/>
+            </svg>
+            <span class="logo-emoji">✊</span>
+        </div>
+
+        <h1 class="game-logo">RPS <b>ARENA</b></h1>
+        <p class="tagline">Beat the C++ engine. Build your streak.</p>
+
+        <button id="startButton" class="start-btn">▶ START GAME</button>
+
+        <button id="howButton" class="ghost-btn">❓ How to Play</button>
+        <div class="how">
+            <span>✊ beats ✌️</span>
+            <span>✌️ beats ✋</span>
+            <span>✋ beats ✊</span>
+        </div>
+        <p class="footer">Powered by C++ · WebAssembly · HTML · CSS · JS</p>
+    </div>
+</section>
+
+<!-- ============ INTRO FLASH (after pressing start) ============ -->
+<div id="intro" class="intro"><span>GET READY</span></div>
+
+<!-- ============ GAME SCREEN ============ -->
+<main id="gameScreen" class="screen game-screen hidden">
+    <div class="container">
+
+        <div class="top-bar">
+            <button id="homeButton" class="small-btn">⌂ Home</button>
+            <h1 class="mini-logo">RPS <b>ARENA</b></h1>
+            <button id="soundButton" class="small-btn">🔊 ON</button>
+        </div>
+
+        <div class="mode-section">
+            <button id="computerMode" class="mode-btn active">Computer Mode</button>
+            <button id="twoPlayerMode" class="mode-btn">2 Player Mode</button>
+        </div>
+
+        <div class="xp-wrap">
+            <div class="lvl" id="levelBadge">LV 1</div>
+            <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+            <div class="rounds">Round <b id="roundCount">0</b></div>
+        </div>
+        <div class="history" id="history"><span class="hist-title">Last rounds</span><div id="histChips"></div></div>
+
+        <!-- HUD -->
+        <div class="score-board">
+            <div class="score-box">
+                <h3 id="playerOneLabel">You</h3>
+                <p id="playerScore">0</p>
+            </div>
+            <div class="score-box streak-box">
+                <h3>🔥 Win Streak</h3>
+                <p id="streakCount">0</p>
+                <small>Best: <span id="bestStreak">0</span></small>
+            </div>
+            <div class="score-box">
+                <h3 id="playerTwoLabel">Computer</h3>
+                <p id="computerScore">0</p>
+            </div>
+        </div>
+
+        <!-- 3D ARENA -->
+        <div class="arena">
+            <div class="fighter">
+                <div class="fighter-name" id="nameOne">You</div>
+                <div class="card3d" id="card1">
+                    <div class="face back">✊</div>
+                    <div class="face front" id="face1">✊</div>
+                </div>
+            </div>
+
+            <div class="vs">VS</div>
+
+            <div class="fighter">
+                <div class="fighter-name" id="nameTwo">Computer</div>
+                <div class="card3d" id="card2">
+                    <div class="face back">✊</div>
+                    <div class="face front" id="face2">✊</div>
+                </div>
+            </div>
+
+            <div id="countdown" class="countdown"></div>
+        </div>
+
+        <div class="result-box">
+            <h2 id="resultText">Loading C++ Game...</h2>
+            <p id="playerChoiceText">Your Choice: -</p>
+            <p id="computerChoiceText">Computer Choice: -</p>
+        </div>
+
+        <h2 id="chooseTitle">Choose Your Move</h2>
+
+        <div class="choices">
+            <button class="choice-btn" data-choice="Rock"><span>✊</span><small>Rock</small></button>
+            <button class="choice-btn" data-choice="Paper"><span>✋</span><small>Paper</small></button>
+            <button class="choice-btn" data-choice="Scissors"><span>✌️</span><small>Scissors</small></button>
+        </div>
+
+        <div class="bottom-buttons">
+            <button id="resetButton" class="reset-btn">Reset Game</button>
+        </div>
+
+        <p id="loadingText" class="loading-text">Connecting C++ game...</p>
+        <p class="footer">Created using C++, HTML, CSS and JavaScript</p>
+    </div>
+</main>
+
+<div id="modal" class="modal hidden"><div class="modal-card">
+    <h2>How to Play</h2>
+    <p>1. Pick Rock, Paper or Scissors.</p>
+    <p>2. Wait for the 3-2-1 countdown, then the cards flip.</p>
+    <p>3. Win to build a 🔥 streak. Win +30 XP, Draw +10, Lose +5.</p>
+    <p>4. Every 100 XP is a new level. Beat the C++ engine!</p>
+    <button id="closeModal" class="start-btn small">Got it</button>
+</div></div>
+<div id="toast" class="toast"></div>
+<div id="flash" class="flash"></div>
+
+<!-- Load C++ WebAssembly first -->
+<script src="game.js"></script>
+<!-- Load website JavaScript second -->
+<script src="script.js"></script>
+
+</body>
+</html>
